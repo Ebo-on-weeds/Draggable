@@ -8,6 +8,17 @@
     "types": ["vite/client"],
     "skipLibCheck": true,
 
+    //"path aliases"
+    "paths":{
+      "@/*":["./src/*"],
+      "@app/*":["./src/app/*"],
+      "@components/*":["./src/components/*"],
+      "@config/*":["./src/config/*"],
+      "@hooks/*":["./src/hooks/*"],
+      "@pages/*":["./src/pages/*"],
+      "@stores/*":["./src/stores/*"],
+      "@testing/*":["./src/testing/*"],
+    },
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
