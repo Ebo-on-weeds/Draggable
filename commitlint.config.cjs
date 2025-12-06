@@ -5,7 +5,16 @@ module.exports = {
     'scope-enum': [
       2,
       'always',
-      ['setup', 'dashboard', 'profile', 'login', 'editor', 'api'],
+      [
+        'setup',
+        'dashboard',
+        'profile',
+        'login',
+        'editor',
+        'api',
+        'store',
+        'landing',
+      ],
     ],
     'type-enum': [
       2,

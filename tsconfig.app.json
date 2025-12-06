@@ -16,8 +16,9 @@
       "@config/*": ["./src/config/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@pages/*": ["./src/pages/*"],
-      "@stores/*": ["./src/stores/*"],
-      "@testing/*": ["./src/testing/*"]
+      "@store/*": ["./src/store/*"],
+      "@testing/*": ["./src/testing/*"],
+      "@types/*": ["./src/types/*"]
     },
     /* Bundler mode */
     "moduleResolution": "bundler",
