@@ -1,25 +1,28 @@
-import { useState } from 'react';
+import { Fragment } from 'react';
 import './app.css';
+import { Provider } from 'react-redux';
+import STORE from '@/config/redux/store';
+import { RouterProvider } from '@tanstack/react-router';
+import { ROUTER, QUERY_CLIENT } from './routing/main';
+import { Notifications } from '@mantine/notifications';
+import { MantineProvider } from '@mantine/core';
+import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
+import { QueryClientProvider } from '@tanstack/react-query';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <div></div>
-      <h1>Vite + React</h1>
-      <div className='card'>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className='read-the-docs'>
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Fragment>
+      <Provider store={STORE}>
+        <QueryClientProvider client={QUERY_CLIENT}>
+          <MantineProvider>
+            <Notifications />
+            <RouterProvider router={ROUTER} />
+            <div>App Component</div>
+          </MantineProvider>
+        </QueryClientProvider>
+      </Provider>
+    </Fragment>
   );
 }
 
