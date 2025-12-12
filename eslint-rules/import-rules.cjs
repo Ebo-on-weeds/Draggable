@@ -66,8 +66,7 @@ module.exports = {
       meta: {
         type: 'problem',
         docs: {
-          description:
-            'Disallow importing between different feature folders inside src/pages',
+          description: 'Disallow importing between different feature folders inside src/pages',
         },
         schema: [],
       },
@@ -117,18 +116,14 @@ module.exports = {
       meta: {
         type: 'problem',
         docs: {
-          description:
-            'Disallow any file outside pages importing from pages (unidirectional rule)',
+          description: 'Disallow any file outside pages importing from pages (unidirectional rule)',
         },
         schema: [],
       },
       create(context) {
         const filename = normalize(context.getFilename());
 
-        if (
-          !isInsideDir(filename, SRC_DIR) ||
-          isInsideDir(filename, PAGES_DIR)
-        ) {
+        if (!isInsideDir(filename, SRC_DIR) || isInsideDir(filename, PAGES_DIR)) {
           return {};
         }
 
@@ -144,8 +139,10 @@ module.exports = {
               return;
             }
 
+            const APPLICATION_LAYER = filename.includes('/src/app/');
+
             // Any import that resolves back into pages violates the unidirectional rule.
-            if (isInsideDir(target, PAGES_DIR)) {
+            if (isInsideDir(target, PAGES_DIR) && !APPLICATION_LAYER) {
               context.report({
                 node,
                 message:

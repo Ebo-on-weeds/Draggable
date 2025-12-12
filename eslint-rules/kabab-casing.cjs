@@ -87,8 +87,7 @@ module.exports = {
       meta: {
         type: 'problem',
         docs: {
-          description:
-            'Ensure folders and files under src use kebab-case names',
+          description: 'Ensure folders and files under src use kebab-case names',
         },
         schema: [],
       },
@@ -130,14 +129,13 @@ module.exports = {
             });
 
             // If we did not visit the violating file/folder, fall back to a generic report.
-            if (
-              !state.fallbackReported &&
-              state.reported.size < issues.length
-            ) {
+            if (!state.fallbackReported && state.reported.size < issues.length) {
               issues.forEach((issue) => {
                 if (state.reported.has(issue.relativePath)) {
                   return;
                 }
+                const FILE_EXTENSION = issue.relativePath.split('/').at(-1).split('.').at(-1);
+                if (FILE_EXTENSION == 'md') return; // if the file is a MarkDown just ignore it and get out
 
                 state.reported.add(issue.relativePath);
                 state.fallbackReported = true;
