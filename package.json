@@ -11,8 +11,11 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@mantine/core": "^8.3.10",
+    "@mantine/notifications": "^8.3.10",
     "@reduxjs/toolkit": "^2.11.0",
-    "@tanstack/router": "^0.0.1-beta.53",
+    "@tanstack/react-query": "^5.90.12",
+    "@tanstack/react-router": "^1.141.0",
     "axios": "^1.13.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
