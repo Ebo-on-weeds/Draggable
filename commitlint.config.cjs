@@ -5,7 +5,7 @@ module.exports = {
     'scope-enum': [
       2,
       'always',
-      ['setup', 'dashboard', 'profile', 'login', 'editor', 'api', 'store', 'landing'],
+      ['setup', 'dashboard', 'profile', 'login', 'editor', 'api', 'store', 'landing', 'general'],
     ],
     'type-enum': [2, 'always', ['feat', 'fix', 'docs', 'chore', 'style', 'test', 'refactor']],
   },
