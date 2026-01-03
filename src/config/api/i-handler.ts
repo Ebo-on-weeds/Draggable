@@ -1,8 +1,10 @@
 /**
  * Abstract contract for REST-style handlers.
  * Implementations should wrap a concrete endpoint and delegate to the shared API methods.
+ *
  */
-export default abstract class IHandler<ResponseType, RequestType> {
+// added UpdateType generic parameter to support different types for update(PATCH/PUT) payloads
+export default abstract class IHandler<ResponseType, RequestType, UpdateType = RequestType> {
   /**
    * Fetch a paginated collection for the underlying endpoint.
    */
@@ -19,7 +21,7 @@ export default abstract class IHandler<ResponseType, RequestType> {
    * Update an existing resource via PUT or PATCH.
    */
   abstract update(
-    payload: RequestType,
+    payload: UpdateType,
     method: 'PUT' | 'PATCH',
     id: string | number,
     contentType?: string

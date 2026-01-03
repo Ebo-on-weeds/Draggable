@@ -1,7 +1,11 @@
 import { Delete, Get, Patch, Post, Put } from './api-methods';
 import type IHandler from './i-handler';
 
-export class handler<TResponse, TRequest> implements IHandler<TResponse, TRequest> {
+export class handler<TResponse, TRequest, TUpdate> implements IHandler<
+  TResponse,
+  TRequest,
+  TUpdate
+> {
   private endpoint: string;
   constructor(endpoint: string) {
     this.endpoint = endpoint;
@@ -19,16 +23,16 @@ export class handler<TResponse, TRequest> implements IHandler<TResponse, TReques
     return response;
   }
   async update(
-    payload: TRequest,
+    payload: TUpdate,
     method: 'PUT' | 'PATCH',
     id: string | number,
     contentType?: string
   ): Promise<TResponse> {
     if (method === 'PUT') {
-      const response = await Put<TRequest, TResponse>(this.endpoint, payload, id, contentType);
+      const response = await Put<TUpdate, TResponse>(this.endpoint, payload, id, contentType);
       return response;
     } else {
-      const response = await Patch<TRequest, TResponse>(this.endpoint, payload, id, contentType);
+      const response = await Patch<TUpdate, TResponse>(this.endpoint, payload, id, contentType);
       return response;
     }
   }
