@@ -4,6 +4,9 @@ import { createRootRouteWithContext, createRoute, createRouter } from '@tanstack
 import { AuthRoute, NoAuthRoute } from './layouts';
 import middleware from './middleware';
 import { EDITOR_ROUTE } from './routes/authenticated/editor.route';
+import ErrorPage500 from '../error-handling/client-errors/500';
+import ErrorPage404 from '../error-handling/client-errors/404';
+import { ERROR_PAGE_401_ROUTE } from './routes/not-authenticated/error-page-401.route';
 
 export const QUERY_CLIENT = new QueryClient();
 
@@ -13,8 +16,8 @@ const ROOT_ROUTE = createRootRouteWithContext<{
 }>()({
   component: () => AuthRoute,
   beforeLoad: async (args) => await middleware({ context: args.context, location: args.location }),
-  errorComponent: () => null,
-  notFoundComponent: () => null,
+  errorComponent: (err) => ErrorPage500({ ErrorComponentProps: err }),
+  notFoundComponent: () => ErrorPage404,
 });
 
 export const AUTH_ROUTE = createRoute({
@@ -31,7 +34,7 @@ export const NO_AUTH_ROUTE = createRoute({
 
 const ROUTE_TREE = ROOT_ROUTE.addChildren([
   AUTH_ROUTE.addChildren([EDITOR_ROUTE]),
-  NO_AUTH_ROUTE.addChildren([]),
+  NO_AUTH_ROUTE.addChildren([ERROR_PAGE_401_ROUTE]),
 ]);
 
 export const ROUTER = createRouter({
